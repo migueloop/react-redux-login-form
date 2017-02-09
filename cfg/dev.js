@@ -33,7 +33,10 @@ config.module.loaders.push({
   include: [].concat(
     config.additionalPaths,
     [ path.join(__dirname, '/../src') ]
-  )
+  ),
+  exclude: /(node_modules|bower_components)/,
+  presets: ['es2015', 'react', "stage-0"],
+  plugins: ["syntax-object-rest-spread", "transform-decorators-legacy","transform-object-assign"]
 });
 
 module.exports = config;

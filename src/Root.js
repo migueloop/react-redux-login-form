@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { Router, Route, IndexRoute } from 'react-router';
 import Index from './components/Index';
-import ContactDetail from './components/ContactDetail';
-
+import Login from './modules/users/components/Login';
 import App from './components/App';
 
 class Root extends Component {
-  
+
   // We need to provide a list of routes
   // for our app, and in this case we are
   // doing so from a Root component
@@ -15,7 +14,7 @@ class Root extends Component {
       <Router history={this.props.history}>
         <Route path='/' component={App}>
           <IndexRoute component={Index}/>
-          <Route path='/contact/:id' component={ContactDetail} />
+            <Route path='/login' component={Login} />
         </Route>
       </Router>
     );

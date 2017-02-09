@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Nav, Navbar, NavItem, Header, Brand } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, Header, Brand, NavDropdown , MenuItem} from 'react-bootstrap';
 import AuthActions from '../actions/AuthActions';
 import AuthStore from '../stores/AuthStore';
+import { Link } from 'react-router';
+
 
 class HeaderComponent extends Component {
 
@@ -10,28 +12,10 @@ class HeaderComponent extends Component {
     this.state = {
       authenticated: AuthStore.isAuthenticated()
     }
-    this.login = this.login.bind(this);
+    // this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
 
-  login() {
-    // We can call the show method from Auth0Lock,
-    // which is passed down as a prop, to allow
-    // the user to log in
-    this.props.lock.show((err, profile, token) => {
-      if (err) {
-        alert(err);
-        return;
-      }
-      // If login is successful, we want to dispatch
-      // the logUserIn action so we can have the profile
-      // and token set in local storage
-      AuthActions.logUserIn(profile, token);
-      // We also want to set the authentication state
-      // for the component to true
-      this.setState({authenticated: true});
-    });
-  }
 
   logout() {
     AuthActions.logUserOut();
@@ -40,19 +24,24 @@ class HeaderComponent extends Component {
 
   render() {
     return (
-      <Navbar>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="#">React Contacts</a>
-          </Navbar.Brand>
-        </Navbar.Header>
-        <Nav>
-          { !this.state.authenticated ? (
-            <NavItem onClick={this.login}>Login</NavItem>
-          ) : (
-            <NavItem onClick={this.logout}>Logout</NavItem>
-          )}
-        </Nav>
+          <Navbar collapseOnSelect>
+            <Navbar.Header>
+              <Navbar.Brand>
+                <a href="#" className="navbar-left"><img src='../logo.png'/></a>
+              </Navbar.Brand>
+              <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+          <Nav pullRight>
+            <NavItem onClick={this.login}>Home</NavItem>
+            <NavItem onClick={this.login}>Page 0</NavItem>
+              { !this.state.authenticated ? (
+              <NavItem onClick={this.login}><Link to={'/login'}>  Login </Link> </NavItem>
+              ) : (
+                <NavItem onClick={this.logout}>Logout</NavItem>
+              )}
+          </Nav>
+        </Navbar.Collapse>
       </Navbar>
     );
   }

@@ -13,9 +13,9 @@ class IndexComponent extends Component {
     return (
       <div>
         { !this.state.authenticated ? (
-          <h2>Log in to view contact details</h2>
+          <h2>Log in to continue</h2>
         ) : (
-          <h2>Click on a contact to view their profile</h2>
+          <h2>Welcome to the Index Page!</h2>
         )}
       </div>
     );
